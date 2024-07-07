@@ -1,0 +1,11 @@
+ Write the time complexity of each of the code segments shown below. 
+ 
+1) int k=1;  while(k<=n){  cout<<k<<endl;  k=k*2;  } // O(logN)
+
+2) for (int i = 0; i < n; i++)  for (int j = i; j > 0; j--)  cout << i << j; // O(N*N)
+
+3) for (int i = 0; i < n; i++)  for (int j = i; j > 0; j--)  for(int k=j; k > 0; k--)  cout << i << j << k; // O(N*N*N)
+
+4) for(int i=n/2;i<=n;i++){  for(int j=1;j<=n;j=j*2){  cout<<i<<j<<endl;  } } // O(N*logN)
+ 
+5) for(int i=n/2;i<=n;i++){  for(int j=1;j<=n;j=j+i){  cout<<i<<j<<endl;  }  } // O(N*logN)
