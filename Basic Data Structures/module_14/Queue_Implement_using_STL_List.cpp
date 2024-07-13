@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-class myStack {
+class myQueue {
 public:
     list <int> l;
 
@@ -9,37 +9,36 @@ public:
         l.push_back(val);
     }
     void pop() {
-        l.pop_back();
+        l.pop_front();
     }
-    int top() {
-        return l.back();
+    int front() {
+        return l.front();
     }
     int size() {
         return l.size();
     }
     bool empty() {
-        if(l.size() == 0) return true;
-        else return false;
+        return l.empty();
     }
 };
 
 int main()
 {
-    myStack st;
+    myQueue q;
 
     int n;
     cin >> n;
     for(int i = 0; i < n; i++) {
         int val;
         cin >> val;
-        st.push(val);
+        q.push(val);
     }
 
-    while(!st.empty()) {
-        cout << st.top() << " ";
-        st.pop();
+    while(!q.empty()) {
+        cout << q.front() << " ";
+        q.pop();
     }
-    cout << endl; 
+    cout << endl;
 
     return 0;
 }
