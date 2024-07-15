@@ -2,15 +2,14 @@
 using namespace std;
 
 class Node {
-public:
-    int val;
-    Node* next;
-    Node* prev;
-
+    public:
+        int val;
+        Node* next;
+        Node* prev;
     Node(int val) {
-        this -> val = val;
-        this -> next = NULL;
-        this -> prev = NULL;
+        this->val = val;
+        this->next = NULL;
+        this->prev = NULL;
     }
 };
 
@@ -18,13 +17,13 @@ void insert_tail(Node* &head, Node* &tail, int val) {
     Node* newNode = new Node(val);
 
     if(tail == NULL) {
-        head = tail = newNode;
+        head = newNode;
+        tail = newNode;
         return;
     }
-
     tail->next = newNode;
     newNode->prev = tail;
-    tail = tail->next;
+    tail = newNode;
 }
 
 void print_normal(Node* head) {
@@ -36,31 +35,25 @@ void print_normal(Node* head) {
     cout << endl;
 }
 
-void reverse(Node* head, Node* tail) {
-    Node* i = head;
-    Node* j = tail;
-    while(i != j && i->next != j) {
-        swap(i->val, j->val);
-        i = i->next;
-        j = j->prev;
-    }
-    swap(i->val, j->val);
-}
-
 int main()
 {
     Node* head = NULL;
     Node* tail = NULL;
-
-    int val;
     while(true) {
+        int val;
         cin >> val;
+        
         if(val == -1) break;
         insert_tail(head, tail, val);
     }
 
-    // print_normal(head);
-    reverse(head, tail);
+    Node* tmp = head;
+    for(Node* i = tmp; i->next != NULL; i = i->next) {
+        for(Node* j = i->next; j != NULL; j = j->next) {
+            if(i->val > j->val) swap(i->val, j->val);
+        }
+    }
+
     print_normal(head);
 
     return 0;
