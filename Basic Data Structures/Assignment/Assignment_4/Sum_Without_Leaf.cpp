@@ -26,11 +26,9 @@ Node* inputBinaryTree() {
     if(root) q.push(root);
 
     while(!q.empty()) {
-        // 1. line theke ber kore ano
         Node* p = q.front();
         q.pop();
 
-        // 2. jabotio ja kaj ase koro
         int l, r;
         cin >> l >> r;
 
@@ -46,38 +44,36 @@ Node* inputBinaryTree() {
         p->left = myLeft;
         p->right = myRight;
 
-        // 3. children gulo line e dao
         if(p->left) q.push(p->left);
         if(p->right) q.push(p->right);
     }
     return root;
 }
 
-void levelOrder(Node* root) {
-    if(root == NULL) {
-        cout << "Tree nai" << endl;
-        return;
-    }
-
+int sumNotLeaf(Node* root) {
     queue <Node*> q;
-    q.push(root);
-
+    if(root) q.push(root);
+    
+    int sum = 0;
     while(!q.empty()) {
-        Node* f = q.front();
+        Node* p = q.front();
         q.pop();
 
-        cout << f->val << " ";
+        if(p->left == NULL && p->right == NULL) continue;
+        else sum += p->val;
 
-        if(f->left) q.push(f->left);
-        if(f->right) q.push(f->right);
+        if(p->left) q.push(p->left);
+        if(p->right) q.push(p->right);
     }
+
+    return sum;
 }
 
 int main()
 {
     Node* root = inputBinaryTree();
     
-    levelOrder(root);
+    cout << sumNotLeaf(root) << endl;
 
     return 0;
 }

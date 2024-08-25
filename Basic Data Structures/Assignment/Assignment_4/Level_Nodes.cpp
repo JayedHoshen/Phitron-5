@@ -26,11 +26,9 @@ Node* inputBinaryTree() {
     if(root) q.push(root);
 
     while(!q.empty()) {
-        // 1. line theke ber kore ano
         Node* p = q.front();
         q.pop();
 
-        // 2. jabotio ja kaj ase koro
         int l, r;
         cin >> l >> r;
 
@@ -46,30 +44,34 @@ Node* inputBinaryTree() {
         p->left = myLeft;
         p->right = myRight;
 
-        // 3. children gulo line e dao
         if(p->left) q.push(p->left);
         if(p->right) q.push(p->right);
     }
     return root;
 }
 
-void levelOrder(Node* root) {
-    if(root == NULL) {
-        cout << "Tree nai" << endl;
-        return;
-    }
+int maxHeight(Node* root) {
+    if(root == NULL) return 0;
+    int l = maxHeight(root->left);
+    int r = maxHeight(root->right);
+    return max(l, r) + 1;
+}
 
-    queue <Node*> q;
-    q.push(root);
+void nodeLevel(Node* root, int x) {
+    queue <pair<Node*, int>> q;
+    q.push({root, 0});
 
     while(!q.empty()) {
-        Node* f = q.front();
+        pair<Node*, int> pr = q.front();
         q.pop();
 
-        cout << f->val << " ";
+        Node* node = pr.first;
+        int level = pr.second;
 
-        if(f->left) q.push(f->left);
-        if(f->right) q.push(f->right);
+        if(level == x) cout << node->val << " ";
+        
+        if(node->left) q.push({node->left, level+1});
+        if(node->right) q.push({node->right, level+1});
     }
 }
 
@@ -77,7 +79,13 @@ int main()
 {
     Node* root = inputBinaryTree();
     
-    levelOrder(root);
+    int x; 
+    cin >> x;
+
+    int h = maxHeight(root);
+
+    if(x >= h) cout << "Invalid" << endl;
+    else nodeLevel(root, x);
 
     return 0;
 }
