@@ -11,18 +11,22 @@
  */
 class Solution {
 public:
-    set <int> s;
-    void inputSet(TreeNode* root) {
+    vector <int> v1, v2;
+    void leafNode(TreeNode* root, int x) {
         if(root == NULL) return;
-        s.insert(root->val);
-        inputSet(root->left);
-        inputSet(root->right);
+        leafNode(root->left, x);
+        leafNode(root->right, x);
+        if(root->left == NULL && root->right == NULL) {
+            if(x == 1) v1.push_back(root->val);
+            else v2.push_back(root->val);
+        }
     }
 
-    bool isUnivalTree(TreeNode* root) {
-        inputSet(root);
+    bool leafSimilar(TreeNode* root1, TreeNode* root2) {
+        leafNode(root1, 1);
+        leafNode(root2, 2);
 
-        if(s.size() == 1) return true;
+        if(v1 == v2) return true;
         else return false;
     }
 };

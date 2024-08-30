@@ -11,18 +11,9 @@
  */
 class Solution {
 public:
-    set <int> s;
-    void inputSet(TreeNode* root) {
-        if(root == NULL) return;
-        s.insert(root->val);
-        inputSet(root->left);
-        inputSet(root->right);
-    }
-
-    bool isUnivalTree(TreeNode* root) {
-        inputSet(root);
-
-        if(s.size() == 1) return true;
-        else return false;
+    bool isSameTree(TreeNode* p, TreeNode* q) {
+        if(p == NULL && q == NULL) return true;
+        if(p == NULL || q == NULL || (p->val != q->val)) return false;
+        return isSameTree(p->left, q->left) && isSameTree(p->right, q->right);
     }
 };

@@ -12,7 +12,7 @@ int main()
         cin >> x;
         s.insert(x); // O(logN)
     }
-
+    
     // cout << s.count(10) << endl; // O(logN)
 
     // if(s.count(100)) cout << "Yes" << endl;
