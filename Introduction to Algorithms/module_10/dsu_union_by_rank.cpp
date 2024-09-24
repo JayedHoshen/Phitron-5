@@ -43,7 +43,7 @@ void dsuUnionByLevel(int node1, int node2) {
     if(level[leaderA] > level[leaderB]) {
         par[leaderB] = leaderA;
     }
-    else if(level[leaderB] > level[leaderA]) {
+    else if(level[leaderA] < level[leaderB]) {
         par[leaderA] = leaderB;
     }
     else {

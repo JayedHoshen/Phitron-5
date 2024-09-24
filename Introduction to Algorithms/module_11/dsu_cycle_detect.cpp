@@ -1,13 +1,13 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-const int N = 100005;
+const int N = 1e5+5;
 
 int parent[N];
 int group_size[N];
 
 void dsu_initialize(int n) {
-    for(int i = 1; i <= n; i++) {
+    for(int i = 0; i < n; i++) {
         parent[i] = -1;
         group_size[i] = 1;
     }
@@ -15,16 +15,14 @@ void dsu_initialize(int n) {
 
 int dsu_find(int node) {
     if(parent[node] == -1) return node;
-    parent[node] = dsu_find(parent[node]);
-    return parent[node];
+    int leader = dsu_find(parent[node]);
+    parent[node] = leader;
+    return leader;
 }
 
 void dsu_union_by_size(int node1, int node2) {
     int leaderA = dsu_find(node1);
     int leaderB = dsu_find(node2);
-    
-    if(leaderA == leaderB) return;
-
     if(group_size[leaderA] > group_size[leaderB]) {
         parent[leaderB] = leaderA;
         group_size[leaderA] += group_size[leaderB];
@@ -41,22 +39,21 @@ int main()
     cin >> n >> e;
 
     dsu_initialize(n);
+    bool cycle = false;
 
     while(e--) {
         int a, b;
         cin >> a >> b;
-        dsu_union_by_size(a, b);
+
+        int leaderA = dsu_find(a);
+        int leaderB = dsu_find(b);
+
+        if(leaderA == leaderB) cycle = true;
+        else dsu_union_by_size(a, b);
     }
 
-    vector <int> leaders;
-    for(int i = 1; i <= n; i++) {
-        if(parent[i] == -1) leaders.push_back(i);
-    }
-
-    cout << leaders.size() - 1 << endl;
-    for(int i = 1; i < leaders.size(); i++) {
-        cout << leaders[i-1] << " " << leaders[i] << endl;
-    }
+    if(cycle) cout << "Cycle found" << endl;
+    else cout << "Cycle not found" << endl;
 
     return 0;
 }
