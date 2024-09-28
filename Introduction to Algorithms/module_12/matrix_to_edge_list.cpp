@@ -12,7 +12,7 @@ int main()
         for(int j = 0; j < n; j++) cin >> mat[i][j];
     }
 
-    // matrix to edge list in unweighted graph
+    // adj matrix to edge list in unweighted graph
     vector <pair<int, int>> edgeList;
     for(int i = 0; i < n; i++) {
         for(int j = 0; j < n; j++) {

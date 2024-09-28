@@ -12,7 +12,7 @@ int main()
         for(int j = 0; j < n; j++) cin >> mat[i][j];
     }
 
-/*    // convert matrix to adj list (unweighted graph)
+ /*   // convert matrix to adj list (unweighted graph)
     vector <int> v[n];
     for(int i = 0; i < n; i++) {
         for(int j = 0; j < n; j++) {

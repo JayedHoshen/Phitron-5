@@ -6,7 +6,7 @@ int main()
     int n, e;
     cin >> n >> e;
 
-/*    // edge list to adj list in unweighted graph
+/*   // edge list to adj list in unweighted graph
     vector <int> v[n];
     while(e--) {
         int a, b, c;

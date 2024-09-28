@@ -14,8 +14,7 @@ int main()
             mat[i][j] = 0;
             if(i == j) mat[i][j] = 1;
         }
-    }    
-    
+    }        
     // input edge list in unweighted graph
     while(e--) {
         int a, b;

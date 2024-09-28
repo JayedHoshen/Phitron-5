@@ -3,9 +3,8 @@ using namespace std;
 
 // convert function: adj list to adj matrix (weighted graph)
 void convert(int n, vector <pair<int, int>> adj[]) {
-    int mat[n][n];
-    
     // initialize mat value -1 but primary diagonal is 0
+    int mat[n][n];    
     for(int i = 0; i < n; i++) {
         for(int j = 0; j < n; j++) {
             mat[i][j] = -1;

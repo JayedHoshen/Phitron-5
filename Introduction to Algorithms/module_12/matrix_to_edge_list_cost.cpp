@@ -16,13 +16,13 @@ int main()
     int n;
     cin >> n;
 
-    // input matrix
+    // input matrix 
     int mat[n][n];
     for(int i = 0; i < n; i++) {
         for(int j = 0; j < n; j++) cin >> mat[i][j];
     }
 
-    // matrix to edge list in weighted graph
+    // adj matrix to edge list in weighted graph
     vector <Edge> edgeList;
     for(int i = 0; i < n; i++) {
         for(int j = 0; j < n; j++) {
