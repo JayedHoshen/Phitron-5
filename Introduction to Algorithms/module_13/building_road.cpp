@@ -22,8 +22,6 @@ int dsu_find(int node) {
 void dsu_union_by_size(int node1, int node2) {
     int leaderA = dsu_find(node1);
     int leaderB = dsu_find(node2);
-    
-    if(leaderA == leaderB) return;
  
     if(group_size[leaderA] > group_size[leaderB]) {
         parent[leaderB] = leaderA;
@@ -45,18 +43,35 @@ int main()
     while(e--) {
         int a, b;
         cin >> a >> b;
-        dsu_union_by_size(a, b);
+        int leaderA = dsu_find(a);
+        int leaderB = dsu_find(b);
+        if(leaderA != leaderB) dsu_union_by_size(a, b);
     }
  
-    vector <int> leaders;
-    for(int i = 1; i <= n; i++) {
-        if(parent[i] == -1) leaders.push_back(i);
+    vector <int> leader;
+    for(int i = 1; i <= n; i++) { 
+        leader.push_back(dsu_find(i));
     }
-    int sz = leaders.size();
-    cout << sz - 1 << endl;
-    for(int i = 1; i < sz; i++) {
-        cout << leaders[i-1] << " " << leaders[i] << endl;
+
+    sort(leader.begin(), leader.end());
+    leader.erase(unique(leader.begin(), leader.end()), leader.end());
+
+    cout << leader.size() - 1 << endl;
+    for(int i = 0; i < leader.size()-1; i++) {
+        cout << leader[i] << " " << leader[i+1] << endl;
     }
+
+    // // another way to solve 
+    // vector <int> leaders;
+    // for(int i = 1; i <= n; i++) { // first
+    //     if(parent[i] == -1) leaders.push_back(i); 
+    // }
+
+    // int sz = leaders.size();
+    // cout << sz - 1 << endl;
+    // for(int i = 1; i < sz; i++) {
+    //     cout << leaders[i-1] << " " << leaders[i] << endl;
+    // }
  
     return 0;
 }
